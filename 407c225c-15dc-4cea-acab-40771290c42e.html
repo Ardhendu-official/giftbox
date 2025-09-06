@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Gift for Monjima</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    borderRadius: {
+                        lg: "var(--radius)",
+                        md: "calc(var(--radius) - 2px)",
+                        sm: "calc(var(--radius) - 4px)",
+                    },
+                    colors: {
+                        background: "var(--background)",
+                        foreground: "var(--foreground)",
+                        card: {
+                            DEFAULT: "var(--card)",
+                            foreground: "var(--card-foreground)",
+                        },
+                        primary: {
+                            DEFAULT: "var(--primary)",
+                            foreground: "var(--primary-foreground)",
+                        },
+                        secondary: {
+                            DEFAULT: "var(--secondary)",
+                            foreground: "var(--secondary-foreground)",
+                        },
+                        muted: {
+                            DEFAULT: "var(--muted)",
+                            foreground: "var(--muted-foreground)",
+                        },
+                        accent: {
+                            DEFAULT: "var(--accent)",
+                            foreground: "var(--accent-foreground)",
+                        },
+                        destructive: {
+                            DEFAULT: "var(--destructive)",
+                            foreground: "var(--destructive-foreground)",
+                        },
+                        border: "var(--border)",
+                        input: "var(--input)",
+                        ring: "var(--ring)",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                        serif: ["Playfair Display", "serif"],
+                    },
+                    animation: {
+                        'bounce-gentle': 'bounce-gentle 2s infinite',
+                        'fade-in': 'fade-in 0.6s ease-out',
+                        'scale-in': 'scale-in 0.8s ease-out',
+                        'gift-open': 'gift-open 1.2s ease-out forwards',
+                        'reveal': 'reveal 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        'bounce-gentle': {
+                            '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' },
+                            '40%': { transform: 'translateY(-10px)' },
+                            '60%': { transform: 'translateY(-5px)' },
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        'scale-in': {
+                            '0%': { opacity: '0', transform: 'scale(0.8)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        'gift-open': {
+                            '0%': { transform: 'scale(1) rotateY(0deg)' },
+                            '50%': { transform: 'scale(1.1) rotateY(10deg)' },
+                            '100%': { transform: 'scale(0) rotateY(180deg)', opacity: '0' },
+                        },
+                        'reveal': {
+                            '0%': { opacity: '0', transform: 'scale(0.5) rotateY(180deg)' },
+                            '100%': { opacity: '1', transform: 'scale(1) rotateY(0deg)' },
+                        },
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: hsl(48 100% 96%);
+            --foreground: hsl(25 95% 28%);
+            --card: hsl(48 100% 98%);
+            --card-foreground: hsl(25 95% 20%);
+            --primary: hsl(43 96% 56%);
+            --primary-foreground: hsl(25 95% 95%);
+            --secondary: hsl(25 95% 64%);
+            --secondary-foreground: hsl(25 95% 15%);
+            --muted: hsl(48 30% 90%);
+            --muted-foreground: hsl(25 30% 45%);
+            --accent: hsl(0 84% 60%);
+            --accent-foreground: hsl(0 0% 98%);
+            --destructive: hsl(0 72% 51%);
+            --destructive-foreground: hsl(0 0% 98%);
+            --border: hsl(48 30% 82%);
+            --input: hsl(48 30% 82%);
+            --ring: hsl(43 96% 56%);
+            --radius: 0.75rem;
+        }
+
+        body {
+            background: linear-gradient(135deg, hsl(48 100% 96%) 0%, hsl(25 100% 94%) 100%);
+            min-height: 100vh;
+        }
+
+        .gift-container {
+            perspective: 1000px;
+        }
+
+        .celebration-bg {
+            background-image: 
+                radial-gradient(circle at 20% 30%, hsl(43 96% 85%) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, hsl(25 95% 85%) 0%, transparent 20%),
+                radial-gradient(circle at 40% 80%, hsl(0 84% 85%) 0%, transparent 15%);
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: hsl(43 96% 70%);
+            border-radius: 50%;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 30%; right: 20%; animation-delay: 0.3s; }
+        .sparkle:nth-child(3) { bottom: 40%; left: 25%; animation-delay: 0.6s; }
+        .sparkle:nth-child(4) { bottom: 20%; right: 15%; animation-delay: 0.9s; }
+        .sparkle:nth-child(5) { top: 50%; left: 10%; animation-delay: 1.2s; }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .hidden-gift {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s ease-out;
+        }
+
+        .show-gift {
+            opacity: 1;
+            visibility: visible;
+            animation: reveal 1s ease-out forwards;
+        }
+
+        .fade-out {
+            animation: gift-open 1.2s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 celebration-bg relative overflow-hidden">
+        <!-- Decorative sparkles -->
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+
+        <!-- Header Message -->
+        <div class="text-center mb-8 animate-fade-in">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-foreground mb-2">
+                Dear Monjima
+            </h1>
+            <p class="text-lg md:text-xl text-muted-foreground font-medium">
+                We have a special surprise for you! 🎉
+            </p>
+        </div>
+
+        <!-- Gift Box Container -->
+        <div class="gift-container mb-8">
+            <!-- Gift Box (Initial State) -->
+            <div id="giftBox" class="cursor-pointer transform transition-all duration-300 hover:scale-105 animate-bounce-gentle">
+                <div class="relative">
+                    <!-- Wrapped gift box with festive ribbon -->
+                    <img 
+                        src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800" 
+                        alt="Beautifully wrapped gift box with golden ribbon" 
+                        class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-2xl shadow-2xl"
+                    />
+                    <!-- Click hint -->
+                    <div class="absolute -bottom-16 left-1/2 transform -translate-x-1/2 bg-primary text-primary-foreground px-6 py-2 rounded-full text-sm font-medium shadow-lg animate-bounce">
+                        Click to open! 🎁
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biryani Reveal (Hidden Initially) -->
+            <div id="biryaniReveal" class="hidden-gift">
+                <div class="text-center">
+                    <!-- Delicious biryani plate as the surprise -->
+                    <img 
+                        src="https://pixabay.com/get/g3b4518888b4ce205e8b8797f90d4280f63c41b6e01cd47caa0f919a05edc1dd7ec41c95a1ff2fa74ddf34b00e8ef3f70e58b692caced13a7a47051e5439a4544_1280.jpg" 
+                        alt="Aromatic biryani plate with fragrant rice and spices" 
+                        class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-2xl shadow-2xl mx-auto"
+                    />
+                    <div class="mt-8 bg-card p-6 rounded-xl shadow-lg max-w-md mx-auto">
+                        <h2 class="text-2xl md:text-3xl font-serif font-bold text-accent mb-3">
+                            Surprise! 🍛
+                        </h2>
+                        <p class="text-foreground text-lg leading-relaxed">
+                            A delicious plate of biryani, made with love just for you, Monjima! 
+                            Hope this brings a smile to your face and warmth to your heart.
+                        </p>
+                        <div class="mt-4 text-sm text-muted-foreground font-medium">
+                            Enjoy every bite! ❤️
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Celebratory Message -->
+        <div id="celebrationMessage" class="hidden-gift text-center max-w-2xl mx-auto">
+            <div class="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-2xl shadow-lg border border-border">
+                <h3 class="text-xl md:text-2xl font-serif font-semibold text-foreground mb-4">
+                    🌟 Special Message 🌟
+                </h3>
+                <p class="text-muted-foreground leading-relaxed">
+                    May this small gesture remind you how special you are! Whether it's sharing a meal 
+                    or celebrating life's beautiful moments, you deserve all the happiness in the world.
+                </p>
+                <div class="mt-6 inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium">
+                    <span>With lots of love</span>
+                    <span>💝</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="absolute bottom-6 text-center text-sm text-muted-foreground">
+            Made with ❤️ especially for Monjima
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const giftBox = document.getElementById('giftBox');
+            const biryaniReveal = document.getElementById('biryaniReveal');
+            const celebrationMessage = document.getElementById('celebrationMessage');
+
+            giftBox.addEventListener('click', function() {
+                // Add opening animation to gift box
+                giftBox.classList.add('fade-out');
+
+                // After gift box animation completes, show the biryani
+                setTimeout(() => {
+                    giftBox.style.display = 'none';
+                    biryaniReveal.classList.remove('hidden-gift');
+                    biryaniReveal.classList.add('show-gift');
+                    
+                    // Show celebration message after biryani appears
+                    setTimeout(() => {
+                        celebrationMessage.classList.remove('hidden-gift');
+                        celebrationMessage.classList.add('show-gift');
+                    }, 800);
+                }, 1200);
+
+                // TODO: Could add confetti animation or sound effects here
+                // TODO: Could implement sharing functionality to social media
+                // TODO: Could add option to reset the gift reveal
+            });
+
+            // Add touch support for mobile devices
+            giftBox.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                giftBox.click();
+            });
+
+            // Preload images for smooth experience
+            const preloadImages = [
+                'https://images.unsplash.com/photo-1563379091339-03246963d321?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800'
+            ];
+            
+            preloadImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        })();
+    </script>
+</body>
+</html>
